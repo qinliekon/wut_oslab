@@ -16,8 +16,10 @@ class DiskScheduler {
     // 先来先服务法（FCFS）
     public int[] fcfs() {
         int seekCount = 0;
-        List<Integer> sequence = new ArrayList<>();
+        List<Integer> sequence = new ArrayList<>(head);
         int currentPos = head;
+
+        sequence.add(head);
 
         for (int request : requests) {
             seekCount += Math.abs(request - currentPos);
@@ -35,11 +37,13 @@ class DiskScheduler {
     // 最短寻道时间优先法（SSTF）
     public int[] sstf() {
         int seekCount = 0;
-        List<Integer> sequence = new ArrayList<>();
+        List<Integer> sequence = new ArrayList<>(head);
         List<Integer> requestList = new ArrayList<>();
         for (int request : requests) {
             requestList.add(request);
         }
+
+        sequence.add(head);
 
         int currentPos = head;
         while (!requestList.isEmpty()) {
@@ -74,6 +78,8 @@ class DiskScheduler {
         List<Integer> sequence = new ArrayList<>();
         List<Integer> left = new ArrayList<>();
         List<Integer> right = new ArrayList<>();
+
+        sequence.add(head);
 
         // 将请求分为左侧和右侧
         for (int request : requests) {
